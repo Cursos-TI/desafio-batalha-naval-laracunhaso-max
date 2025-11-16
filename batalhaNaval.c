@@ -36,5 +36,158 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
+    // Declaração do tabuleiro 10x10
+    int tabuleiro[10][10];
+    int i, j;
+    
+    // Inicializar tabuleiro com água (0)
+    for (i = 0; i < 10; i++) {
+        for (j = 0; j < 10; j++) {
+            tabuleiro[i][j] = 0;
+        }
+    }
+    
+    printf("=== BATALHA NAVAL - POSICIONAMENTO DE NAVIOS ===\n\n");
+    
+    // 1. POSICIONAR NAVIO HORIZONTAL (linha 2, coluna 1)
+    printf("Posicionando navio horizontal na linha 2, coluna 1...\n");
+    int posicaoValida = 1;
+    
+    // Verificar se cabe no tabuleiro
+    if (1 + 3 <= 10) { // coluna inicial + tamanho navio
+        // Verificar sobreposição
+        for (j = 1; j < 4; j++) {
+            if (tabuleiro[2][j] != 0) {
+                posicaoValida = 0;
+                break;
+            }
+        }
+        
+        // Posicionar navio
+        if (posicaoValida) {
+            for (j = 1; j < 4; j++) {
+                tabuleiro[2][j] = 3;
+            }
+            printf("Navio horizontal posicionado com sucesso!\n");
+        } else {
+            printf("Erro: Sobreposição de navios!\n");
+        }
+    } else {
+        printf("Erro: Navio fora dos limites do tabuleiro!\n");
+    }
+    
+    // 2. POSICIONAR NAVIO VERTICAL (linha 0, coluna 8)
+    printf("Posicionando navio vertical na linha 0, coluna 8...\n");
+    posicaoValida = 1;
+    
+    // Verificar se cabe no tabuleiro
+    if (0 + 3 <= 10) { // linha inicial + tamanho navio
+        // Verificar sobreposição
+        for (i = 0; i < 3; i++) {
+            if (tabuleiro[i][8] != 0) {
+                posicaoValida = 0;
+                break;
+            }
+        }
+        
+        // Posicionar navio
+        if (posicaoValida) {
+            for (i = 0; i < 3; i++) {
+                tabuleiro[i][8] = 3;
+            }
+            printf("Navio vertical posicionado com sucesso!\n");
+        } else {
+            printf("Erro: Sobreposição de navios!\n");
+        }
+    } else {
+        printf("Erro: Navio fora dos limites do tabuleiro!\n");
+    }
+    
+    // 3. POSICIONAR NAVIO DIAGONAL PRINCIPAL (linha 5, coluna 5)
+    printf("Posicionando navio diagonal principal na linha 5, coluna 5...\n");
+    posicaoValida = 1;
+    
+    // Verificar se cabe no tabuleiro (linha e coluna aumentam juntas)
+    if (5 + 3 <= 10 && 5 + 3 <= 10) {
+        // Verificar sobreposição
+        for (i = 0; i < 3; i++) {
+            if (tabuleiro[5 + i][5 + i] != 0) {
+                posicaoValida = 0;
+                break;
+            }
+        }
+        
+        // Posicionar navio
+        if (posicaoValida) {
+            for (i = 0; i < 3; i++) {
+                tabuleiro[5 + i][5 + i] = 3;
+            }
+            printf("Navio diagonal principal posicionado com sucesso!\n");
+        } else {
+            printf("Erro: Sobreposição de navios!\n");
+        }
+    } else {
+        printf("Erro: Navio fora dos limites do tabuleiro!\n");
+    }
+    
+    // 4. POSICIONAR NAVIO DIAGONAL SECUNDÁRIA (linha 1, coluna 8)
+    printf("Posicionando navio diagonal secundaria na linha 1, coluna 8...\n");
+    posicaoValida = 1;
+    
+    // Verificar se cabe no tabuleiro (linha aumenta, coluna diminui)
+    if (1 + 3 <= 10 && 8 - 2 >= 0) {
+        // Verificar sobreposição
+        for (i = 0; i < 3; i++) {
+            if (tabuleiro[1 + i][8 - i] != 0) {
+                posicaoValida = 0;
+                break;
+            }
+        }
+        
+        // Posicionar navio
+        if (posicaoValida) {
+            for (i = 0; i < 3; i++) {
+                tabuleiro[1 + i][8 - i] = 3;
+            }
+            printf("Navio diagonal secundaria posicionado com sucesso!\n");
+        } else {
+            printf("Erro: Sobreposição de navios!\n");
+        }
+    } else {
+        printf("Erro: Navio fora dos limites do tabuleiro!\n");
+    }
+    
+    // EXIBIR TABULEIRO FINAL
+    printf("\n=== TABULEIRO FINAL ===\n");
+    
+    // Cabeçalho com números das colunas
+    printf("   ");
+    for (j = 0; j < 10; j++) {
+        printf("%2d ", j);
+    }
+    printf("\n");
+    
+    // Linha separadora
+    printf("   ");
+    for (j = 0; j < 10; j++) {
+        printf("---");
+    }
+    printf("\n");
+    
+    // Conteúdo do tabuleiro com números das linhas
+    for (i = 0; i < 10; i++) {
+        printf("%2d|", i);
+        for (j = 0; j < 10; j++) {
+            printf("%2d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+    
+    // Legenda
+    printf("\nLegenda:\n");
+    printf("0 - Água\n");
+    printf("3 - Navio\n");
+    
+
     return 0;
 }
